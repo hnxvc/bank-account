@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import BankBalanceStore from '../store/BankBalanceStore';
+import BankRewardsStore from '../store/BankRewardsStore';
 import { Container } from 'flux/utils';
 import bankConstants from '../utils/constants';
 import BankActions from '../actions/BankActions';
@@ -12,8 +13,7 @@ class App extends Component {
     BankActions.createAccount();
     this.state = {
       ammount: 0,
-      balance: BankBalanceStore.getState(),
-      name: 'Hoa Than'
+      balance: BankBalanceStore.getState()
     };
     this.handleChangeAmmount = this.handleChangeAmmount.bind(this);
     this.withdraw = this.withdraw.bind(this);
@@ -49,6 +49,7 @@ class App extends Component {
         <section className="App-body">
           <header>FluxTrust Bank</header>
           <h1>Your balance is ${(this.state.balance)}</h1>
+          <h2>Your Points Rewards Tier is {this.state.rewardsTier}</h2>
           <div className="atm">
             <input type="text"
               placeholder="Enter Ammount"
@@ -67,7 +68,10 @@ class App extends Component {
 App.getStores = () => ([BankBalanceStore]);
 
 App.calculateState = (prevState) => {
-  return ({ balance: BankBalanceStore.getState()});
+  return ({
+    balance: BankBalanceStore.getState(),
+    rewardsTier: BankRewardsStore.getState()
+  });
 };
 const AppContainer = Container.create(App);
 
