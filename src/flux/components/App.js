@@ -3,7 +3,6 @@ import './App.css';
 import BankBalanceStore from '../store/BankBalanceStore';
 import BankRewardsStore from '../store/BankRewardsStore';
 import { Container } from 'flux/utils';
-import bankConstants from '../utils/constants';
 import BankActions from '../actions/BankActions';
 
 class App extends Component {
