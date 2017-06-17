@@ -17,6 +17,7 @@ class App extends Component {
     this.handleChangeAmmount = this.handleChangeAmmount.bind(this);
     this.withdraw = this.withdraw.bind(this);
     this.deposit = this.deposit.bind(this);
+    this.resetAmount = this.resetAmount.bind(this);
   }
 
   componentDidMount() {
@@ -35,10 +36,12 @@ class App extends Component {
 
   deposit() {
     BankActions.depositIntoAccount(this.state.ammount);
+    this.resetAmount();
   }
 
   withdraw() {
     BankActions.withdrawFromAccount(this.state.ammount);
+    this.resetAmount();
   }
 
   handleChangeAmmount(e) {
@@ -47,12 +50,15 @@ class App extends Component {
     });
   }
 
+  resetAmount() {
+    this.setState({
+      ammount: 0
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <h2>Welcome to Bank Acount</h2>
-        </div>
         <section className="App-body">
           <header>FluxTrust Bank</header>
           <h1>Your balance is ${(this.state.balance)}</h1>
